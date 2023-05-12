@@ -31,6 +31,7 @@ GPT2_PRETRAINED_CONFIG_ARCHIVE_MAP = {
     "gpt2-large": "https://huggingface.co/gpt2-large/resolve/main/config.json",
     "gpt2-xl": "https://huggingface.co/gpt2-xl/resolve/main/config.json",
     "distilgpt2": "https://huggingface.co/distilgpt2/resolve/main/config.json",
+    "reweighted-gpt2": "https://huggingface.co/reweighted-gpt2/resolve/main/config.json",
 }
 
 
@@ -271,3 +272,20 @@ class GPT2OnnxConfig(OnnxConfigWithPast):
     @property
     def default_onnx_opset(self) -> int:
         return 13
+
+class ReweightedGPT2Config(GPT2Config):
+    model_type = "reweighted_gpt2"
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # You can add any additional arguments here. For example:
+        # self.my_new_argument = kwargs.pop('my_new_argument', "default_value")
+
+    @classmethod
+    def from_pretrained(cls, pretrained_model_name_or_path, **kwargs):
+        if pretrained_model_name_or_path in GPT2_PRETRAINED_CONFIG_ARCHIVE_MAP:
+            pretrained_model_name_or_path = GPT2_PRETRAINED_CONFIG_ARCHIVE_MAP[
+                pretrained_model_name_or_path
+            ]
+
+        return super().from_pretrained(pretrained_model_name_or_path, **kwargs)
