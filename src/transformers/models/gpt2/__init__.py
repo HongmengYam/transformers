@@ -27,7 +27,7 @@ from ...utils import (
 
 
 _import_structure = {
-    "configuration_gpt2": ["GPT2_PRETRAINED_CONFIG_ARCHIVE_MAP", "GPT2Config", "GPT2OnnxConfig"],
+    "configuration_gpt2": ["GPT2_PRETRAINED_CONFIG_ARCHIVE_MAP", "GPT2Config", "GPT2OnnxConfig", "Reweighted_GPT2LMHeadModelConfig"],
     "tokenization_gpt2": ["GPT2Tokenizer"],
 }
 
@@ -55,6 +55,7 @@ else:
         "GPT2Model",
         "GPT2PreTrainedModel",
         "load_tf_weights_in_gpt2",
+        "Reweighted_GPT2LMHeadModel"
     ]
 
 try:
