@@ -40,7 +40,7 @@ class Reweighted_GPT2LMHeadModel(PreTrainedModel):
 
         model_parameters = filter(lambda p: p.requires_grad, self.W.parameters())
         params = sum([np.prod(p.size()) for p in model_parameters])
-        print(f"N trainable params W: {params}")
+        # print(f"N trainable params W: {params}")
 
     def parameters(self):
         return (
