@@ -97,11 +97,10 @@ def test():
     input_ids = torch.tensor([input_ids])  # Convert to tensor with batch dimension
 
     # Generate text until the output length (which includes the context length) reaches 50
-    greedy_output = model.generate(input_ids, max_length=50)
+    greedy_output = model.generate(input_ids=input_ids, max_length=50)
 
     print("Output:\n" + 100 * '-')
     print(tokenizer.decode(greedy_output[0], skip_special_tokens=True))
-
 
     print("End")
 
