@@ -93,15 +93,16 @@ def test():
 
     print(output)
 
-    # encode context the generation is conditioned on
     input_ids = tokenizer.encode('I enjoy walking with my cute dog')
-    print("Context encoded")
+    input_ids = torch.tensor(input_ids).unsqueeze(0)  # Convert to tensor and add batch dimension
+    print("Context Encoded")
 
-    # generate text until the output length (which includes the context length) reaches 50
+    # Generate text until the output length (which includes the context length) reaches 50
     greedy_output = model.generate(input_ids, max_length=50)
 
     print("Output:\n" + 100 * '-')
     print(tokenizer.decode(greedy_output[0], skip_special_tokens=True))
+
     print("End")
 
 class Reweighted_GPT2LMHeadModelConfig(PretrainedConfig):
