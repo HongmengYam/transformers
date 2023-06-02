@@ -94,14 +94,14 @@ def test():
     print(output)
 
     input_ids = tokenizer.encode('I enjoy walking with my cute dog')
-    input_ids = torch.tensor(input_ids).unsqueeze(0)  # Convert to tensor and add batch dimension
-    print("Context Encoded")
+    input_ids = torch.tensor([input_ids])  # Convert to tensor with batch dimension
 
     # Generate text until the output length (which includes the context length) reaches 50
     greedy_output = model.generate(input_ids, max_length=50)
 
     print("Output:\n" + 100 * '-')
     print(tokenizer.decode(greedy_output[0], skip_special_tokens=True))
+
 
     print("End")
 
