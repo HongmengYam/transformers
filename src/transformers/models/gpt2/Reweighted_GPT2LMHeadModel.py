@@ -94,7 +94,7 @@ def test():
     print(output)
 
     input_ids = tokenizer.encode('I enjoy walking with my cute dog')
-    input_ids = torch.tensor([list(iter(input_ids))]).to(next(model.parameters()).device)
+    input_ids = torch.tensor([input_ids]).to(next(model.parameters()).device)
 
     # Generate text until the output length (which includes the context length) reaches 50
     greedy_output = model.generate(input_ids=input_ids, max_length=50)
