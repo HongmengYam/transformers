@@ -79,12 +79,16 @@ def test():
     print(text)
     inputs = tokenizer(text, return_tensors='pt')
 
+    print("Tokenized Input")
+
     # Extract inputs and attention mask
     input_ids = inputs['input_ids']
     attention_mask = inputs['attention_mask']
+    print("Extracted inputs and attention mask")
 
     # Run the model
     output = model(input_ids, attention_mask)
+    print("Ran model")
 
     print(output)
 
