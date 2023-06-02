@@ -94,7 +94,7 @@ def test():
     print(output)
 
     # encode context the generation is conditioned on
-    input_ids = tokenizer.encode('I enjoy walking with my cute dog', return_tensors='tf')
+    input_ids = tokenizer.encode('I enjoy walking with my cute dog')
     print("Context encoded")
 
     # generate text until the output length (which includes the context length) reaches 50
