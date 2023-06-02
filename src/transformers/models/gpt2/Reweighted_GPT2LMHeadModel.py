@@ -5,6 +5,7 @@ from tensordict import TensorDict
 from tqdm import tqdm
 from transformers.models.gpt2.configuration_gpt2 import GPT2Config
 from transformers.onnx import config
+from transformers.models.gpt2.modeling_gpt2 import GPT2LMHeadModel
 from transformers import GPT2TokenizerFast
 import wandb
 import numpy as np
@@ -19,9 +20,9 @@ plt.rcParams.update(bundles.iclr2023())
 
 
 
-class Reweighted_GPT2LMHeadModel(PreTrainedModel):
+class Reweighted_GPT2LMHeadModel(GPT2LMHeadModel):
     def __init__(self, config):
-        super().__init__(PretrainedConfig())
+        super().__init__(config)
         self.config = config
         self.P = GPT2LMHeadModel.from_pretrained("gpt2")
         # self.P = OPTForCausalLM.from_pretrained("facebook/opt-350m")
@@ -94,12 +95,14 @@ def test():
 
     # encode context the generation is conditioned on
     input_ids = tokenizer.encode('I enjoy walking with my cute dog', return_tensors='tf')
+    print("Context encoded")
 
     # generate text until the output length (which includes the context length) reaches 50
     greedy_output = model.generate(input_ids, max_length=50)
 
     print("Output:\n" + 100 * '-')
     print(tokenizer.decode(greedy_output[0], skip_special_tokens=True))
+    print("End")
 
 class Reweighted_GPT2LMHeadModelConfig(PretrainedConfig):
     def __init__(self, **kwargs):
